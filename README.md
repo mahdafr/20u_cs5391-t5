@@ -62,7 +62,7 @@ When you create a rule in the POX controller, you need to also have POX "install
 This makes it so the switch "remembers" what to do for a few seconds.
 __Do not handle each packet individually inside of the controller!__
 _Hint: To do this, look up `ofp_flow_mod`._
-The [OpenFlow tutorial]() (specifically "Sending OpenFlow messages with POX") and the [POX Wiki]() are both useful resources for understanding how to use POX.
+The [OpenFlow tutorial](https://github.com/mininet/openflow-tutorial/wiki) (specifically "Sending OpenFlow messages with POX") and the [POX Wiki](https://noxrepo.github.io/pox-doc/html/) are both useful resources for understanding how to use POX.
 
 __Deliverables__:
 1.	Your `part2controller.py` file
