@@ -27,13 +27,17 @@ Mininet starts with a default network that you can poke at.
     1. Your modified `part1.py` file
     2. Screenshots of the `iperf`, `dump`, and `pingall` commands (from mininet) in PDF format.
 
-### Results
+### Results, _output(s) and result(s) stored in `_deliverables\part1`_
 <details>
-  <summary>Results</summary>
+  <summary>Environment Setup</summary>
   
   - I installed mininet via [apt-get](https://github.com/mininet/mininet/blob/master/INSTALL)
-  - I tested the installation, as per [these instructions](http://mininet.org/download/)
-  - I completed the [Mininet Walkthrough](http://mininet.org/walkthrough/#part-1-everyday-mininet-usage), approx. 1hr to complete
+  - I tested the installation, as per [these instructions](http://mininet.org/download/), using port 6654 instead of 6634 (updated Mininet)
+  - I completed the [Mininet Walkthrough](http://mininet.org/walkthrough/#part-1-everyday-mininet-usage), approx. 30m to complete
+
+  <summary>Designing the Network Topology</summary>
+
+  - Readthrough: `topos` scripts to design and customize mininet architecture using Python API
   
 </details>
 
