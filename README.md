@@ -27,6 +27,16 @@ Mininet starts with a default network that you can poke at.
     1. Your modified `part1.py` file
     2. Screenshots of the `iperf`, `dump`, and `pingall` commands (from mininet) in PDF format.
 
+### Results
+<details>
+  <summary>Results</summary>
+  
+  - I installed mininet via [apt-get](https://github.com/mininet/mininet/blob/master/INSTALL)
+  - I tested the installation, as per [these instructions](http://mininet.org/download/)
+  - I completed the [Mininet Walkthrough](http://mininet.org/walkthrough/#part-1-everyday-mininet-usage), approx. 1hr to complete
+  
+</details>
+
 ## Part 2
 In part 1, you experimented with Mininet using its internal controller.
 In this (and future) parts, you will instead be using a custom controller to send commands to the switches.
