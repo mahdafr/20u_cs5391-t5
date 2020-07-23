@@ -27,7 +27,7 @@ Mininet starts with a default network that you can poke at.
     1. Your modified `part1.py` file
     2. Screenshots of the `iperf`, `dump`, and `pingall` commands (from mininet) in PDF format.
 
-### Results, _output(s) and result(s) stored in `_deliverables\part1`_
+### Results, _output(s) and result(s) stored in `_deliverables\part1.zip`_
 <details>
   <summary>Environment Setup</summary>
   
@@ -38,6 +38,10 @@ Mininet starts with a default network that you can poke at.
   <summary>Designing the Network Topology</summary>
 
   - Readthrough: `topos` scripts to design and customize mininet architecture using Python API
+  - Created a for-loop to iterate over 4 hosts, creating them and setting links between the hosts and the switch.
+  - Ran the CLI to test the custom topology
+    - output for `pingall`, `iperf`, `dump` are all included as separate PDFs in the `part1.zip` directory
+    - output for all in `verbose` (reduced output) included also
   
 </details>
 
