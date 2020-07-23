@@ -34,8 +34,11 @@ Mininet starts with a default network that you can poke at.
   - I installed mininet via [apt-get](https://github.com/mininet/mininet/blob/master/INSTALL)
   - I tested the installation, as per [these instructions](http://mininet.org/download/), using port 6654 instead of 6634 (updated Mininet)
   - I completed the [Mininet Walkthrough](http://mininet.org/walkthrough/#part-1-everyday-mininet-usage), approx. 30m to complete
+  
+</details>
 
-  <summary>Designing the Network Topology</summary>
+<details>
+  <summary>Designing the 4-host, 1-switch Network Topology</summary>
 
   - Readthrough: `topos` scripts to design and customize mininet architecture using Python API
   - Created a for-loop to iterate over 4 hosts, creating them and setting links between the hosts and the switch.
