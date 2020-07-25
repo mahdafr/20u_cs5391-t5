@@ -43,6 +43,7 @@ Mininet starts with a default network that you can poke at.
   - Readthrough: `topos` scripts to design and customize mininet architecture using Python API
   - Created a for-loop to iterate over 4 hosts, creating them and setting links between the hosts and the switch.
   - Ran the CLI to test the custom topology
+    - execute: `sudo mn --custom path/to/file --topo part1 --test COMMAND`, where `COMMAND` is either `pingall` or `iperf`, not adding a `COMMAND` builds the topology and waits for either further commands (say, `dump`) or an `exit` to end the run
     - output for `pingall`, `iperf`, `dump` are all included as separate PDFs in the `part1.zip` directory
     - output for all in `verbose` (reduced output) included also
   
