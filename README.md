@@ -91,7 +91,35 @@ __Deliverables__:
 2.	Documentation on how you deployed the controller and how you run mininet with new topology.
 3.	A screenshot of the ___pingall___ command. Note that h1 and h4 should be able to ping each other (h2 and h3 as well), but not across subnets. Also, the ___iperf___ command should fail (as you're blocking IP traffic). This is realized as the command hanging.
 4.	A screenshot of the output of the ___dpctl dump-flows___ command. This should contain all of the rules you've inserted into your switch.
- 
+
+### Results, _output(s) and result(s) stored in `_deliverables\part2.zip`_
+<details>
+  <summary>Environment Setup</summary>
+
+  - Readthrough: `pox` API to understand packet flow, and messaging to the controller
+  - Ran the Mininet CLI to start the emulation:
+    - execute (in older versions of Mininet/POX): `sudo mn --custom path/to/file --topo part2 --controller remote`
+    - execute (in newer versions of Mininet/POX): `sudo mn --custom path/to/file --topo part2 --controller remote,port=6633`
+  - Then started the POX hub:
+    - execute: `sudo ~/pox/pox.py misc.part2controller`, after adding `part2controller.py` to the `~/pox/pox/misc` directory
+  
+</details>
+
+<details>
+  <summary>Applying the Rules to the Firewall</summary>
+
+  - todo
+  
+</details>
+
+<details>
+  <summary>References</summary>
+
+  - Completing the [OpenFlow tutorial](github.com/mininet/openflow-tutorial/wiki/Create-a-Learning-Switch#Sending-OpenFlow-messages-with-POX)
+  - Following a [3rd-party tutorial on POX Controllers](sdnhub.org/tutorials/pox/)
+  
+</details>
+
 ## Part 3
 In part 2 you have implemented a simple firewall that allowed ICMP packets but blocked all other packets.
 For your part 3, you will be expanding on this to implement routing between subnets and implementing firewalls for certain subnets.
