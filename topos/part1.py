@@ -20,4 +20,4 @@ if __name__ == '__main__':
     net = Mininet (topo=t)
     net.start()
     CLI(net)
-#    net.stop()
+    net.stop()
