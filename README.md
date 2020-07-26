@@ -118,10 +118,14 @@ __Deliverables__:
   - To run the emulation:
     1. Run the Mininet topology (`part2`): `sudo mn --custom path/to/file --topo part2 --controller remote`
     2. Run the POX hub (`part2controller.py`): `sudo ~/pox/pox.py misc.part2controller`
-  - Outputs included:
+  - `outputs.pdf` includes:
     - output of the `pingall` command
     - output of the `iperf` command
     - output of the `dpctl dump-flows` command
+  - `outputs_v2.pdf` includes: _now returning ipv6, and other ipv4 traffic back to sender_
+    - output of the `pingall` command
+    - output of the `iperf` command
+    - output of the `dpctl dump-flows` command _the rules have changed to include these additions_
   
 </details>
 
@@ -166,3 +170,22 @@ __Deliverables__:
 2. A screenshot of the ___pingall___ command. All nodes but hnotrust should be able to send and respond to pings.
 3. A screenshot of the ___iperf hnotrust1 h10___ and ___iperf h10 serv1___ commands. Though not shown in these commands, hnotrust should not be able to transfer to serv1. It should be able to transfer to other hosts.
 4. A screenshot of the output of the ___dpctl dump-flows___ command. This should contain all of the rules you've inserted into your switches.
+
+### Results, _output(s) and result(s) stored in `_deliverables\part3.zip`_
+<details>
+  <summary>Traffic Blocking in the Network</summary>
+  
+  - I installed mininet via [apt-get](https://github.com/mininet/mininet/blob/master/INSTALL)
+  - I tested the installation, as per [these instructions](http://mininet.org/download/), using port 6654 instead of 6634 (updated Mininet)
+  - I completed the [Mininet Walkthrough](http://mininet.org/walkthrough/#part-1-everyday-mininet-usage), approx. 30m to complete
+  
+</details>
+
+<details>
+  <summary>References</summary>
+  
+  - Again, the POX Wiki on:
+    - [ofp_flow_mod](http://noxrepo.github.io/pox-doc/html/#ofp-flow-mod-flow-table-modification) for adding rules
+    - [match](http://noxrepo.github.io/pox-doc/html/#match-structure) for rules
+  
+</details>

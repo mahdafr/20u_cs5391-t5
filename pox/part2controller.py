@@ -24,16 +24,17 @@ class Firewall (object):
 
     # send the message to the switch: ARP and IPv4 traffic to all ports (non-sender)
     connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
-					priority=5,
+					priority=10,
     		    			match=of.ofp_match(dl_type=0x0800, nw_proto=pkt.ipv4.ICMP_PROTOCOL)))	# ipv4: icmp
     connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
-    		    			priority=6,
+    		    			priority=9,
     		    			match=of.ofp_match(dl_type=0x0806)))	# arp
-    """
-    connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
-    		    			priority=7,
-    		    			match=of.ofp_match(dl_type=0x86dd)))	# ipv6
-    """
+    self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_IN_PORT),
+					priority=8,
+    		    			match=of.ofp_match(dl_type=0x86dd)))	# send ipv6 back
+    self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_IN_PORT),
+					priority=7,
+    		    			match=of.ofp_match(dl_type=0x0800)))	# send ipv4 back
 
   def _handle_PacketIn (self, event):
     """
