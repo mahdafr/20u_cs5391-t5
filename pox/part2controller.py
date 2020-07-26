@@ -5,6 +5,7 @@
 
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
+import pox.lib.packet as pkt
 
 log = core.getLogger()
 
@@ -21,7 +22,18 @@ class Firewall (object):
     # This binds our PacketIn event listener
     connection.addListeners(self)
 
-    #add switch rules here
+    # send the message to the switch: ARP and IPv4 traffic to all ports (non-sender)
+    connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
+					priority=5,
+    		    			match=of.ofp_match(dl_type=0x0800, nw_proto=pkt.ipv4.ICMP_PROTOCOL)))	# ipv4: icmp
+    connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
+    		    			priority=6,
+    		    			match=of.ofp_match(dl_type=0x0806)))	# arp
+    """
+    connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=of.OFPP_FLOOD),
+    		    			priority=7,
+    		    			match=of.ofp_match(dl_type=0x86dd)))	# ipv6
+    """
 
   def _handle_PacketIn (self, event):
     """

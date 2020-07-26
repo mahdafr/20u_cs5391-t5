@@ -108,15 +108,32 @@ __Deliverables__:
 <details>
   <summary>Applying the Rules to the Firewall</summary>
 
-  - todo
+  - We need to define two rules:
+    1. Allow all IPv4 traffic to pass through the firewall.
+    2. Allow all ARP protocol traffic to pass through the firewall.
+    3. Block all others.
+  - So, we design the rules using the `ofp_flow_mod` library. On creating these messages, we send them to the switch to "install" the message to the controller.
+    - since IPv4 traffic uses 32 bits to express the data, we use `0x0800` hex code
+    - since we want to allow ARP traffic to pass, we check the lower 8 bits, or `0x0806` in hex
+  - To run the emulation:
+    1. Run the Mininet topology (`part2`): `sudo mn --custom path/to/file --topo part2 --controller remote`
+    2. Run the POX hub (`part2controller.py`): `sudo ~/pox/pox.py misc.part2controller`
+  - Outputs included:
+    - output of the `pingall` command
+    - output of the `iperf` command
+    - output of the `dpctl dump-flows` command
   
 </details>
 
 <details>
   <summary>References</summary>
 
-  - Completing the [OpenFlow tutorial](github.com/mininet/openflow-tutorial/wiki/Create-a-Learning-Switch#Sending-OpenFlow-messages-with-POX)
-  - Following a [3rd-party tutorial on POX Controllers](sdnhub.org/tutorials/pox/)
+  - Completing the [OpenFlow tutorial](http://github.com/mininet/openflow-tutorial/wiki/Create-a-Learning-Switch#Sending-OpenFlow-messages-with-POX)
+  - Following a [3rd-party tutorial on POX Controllers](http://sdnhub.org/tutorials/pox/)
+  - The POX API
+  	- on [ofp_flow_mod](http://noxrepo.github.io/pox-doc/html/#ofp-flow-mod-flow-table-modification)
+  	- on [match](http://noxrepo.github.io/pox-doc/html/#match-structure)
+  - This [Open vSwitch Manual](http://openvswitch.org/support/dist-docs-2.5/ovs-ofctl.8.txt)
   
 </details>
 
