@@ -1,4 +1,4 @@
-# Part 3 of UWCSE's Project 3
+# Part 4 of UWCSE's Project 3
 #
 # based on Lab Final from UCSC's Networking Class
 # which is based on of_tutorial by James McCauley
@@ -6,6 +6,7 @@
 from pox.core import core
 import pox.openflow.libopenflow_01 as of
 from pox.lib.addresses import IPAddr, IPAddr6, EthAddr
+import pox.lib.packet as pkt
 
 log = core.getLogger()
 
@@ -47,24 +48,57 @@ class Part3Controller (object):
       exit(1)
 
   def s1_setup(self):
-    #put switch 1 rules here
-    pass
+    self._allow_all()
 
   def s2_setup(self):
-    #put switch 2 rules here
-    pass
+    self._allow_all()
 
   def s3_setup(self):
-    #put switch 3 rules here
-    pass
+    self._allow_all()
 
   def cores21_setup(self):
-    #put core switch rules here
-    pass
+    self._block()                               # block comm.s w/hnotrust
+    self._internal_to_external()                # guide traffic through sw
+    self._allow_all()                           # flood/drop the rest
 
   def dcs31_setup(self):
-    #put datacenter switch rules here
-    pass
+    self._allow_all()
+
+  # flood all communications going to through the net, dropping the rest
+  def _allow_all(self, act=of.ofp_action_output(port=of.OFPP_FLOOD)):
+    self.connection.send(of.ofp_flow_mod(action=act,
+                                         priority=2))     # flood to all ports
+    # otherwise, iperfs will hang
+    self.connection.send(of.ofp_flow_mod(priority=1))
+  
+  # block ICMP from hnotrust to anyone, and block all IP to serv1
+  def _block(self, block=IPS['hnotrust'][0]):
+    block_icmp = of.ofp_flow_mod(priority=20,
+                                 match=of.ofp_match(dl_type=0x800,
+                                                    nw_proto=pkt.ipv4.ICMP_PROTOCOL,
+                                                    nw_src=block))
+    self.connection.send(block_icmp)
+    block_to_serv = of.ofp_flow_mod(priority=19,
+                                 match=of.ofp_match(dl_type=0x800,
+                                                    nw_src=block,
+                                                    nw_dst=IPS['serv1'][0]))
+    self.connection.send(block_to_serv)
+  
+  # allow IP traffic as normal
+  def _internal_to_external(self):
+    host = {10: (IPS['h10'][0], 1),
+            20: (IPS['h20'][0], 2),
+            30: (IPS['h30'][0], 3),
+            40: (IPS['serv1'][0], 4),
+            50: (IPS['hnotrust'][0], 5)}
+    
+    for i in range(len(host)):
+      h = host[(i+1)*10][0]
+      p = host[(i+1)*10][1]
+      self.connection.send(of.ofp_flow_mod(action=of.ofp_action_output(port=p),
+                                           priority=5,
+                                           match=of.ofp_match(dl_type=0x800,
+                                                              nw_dst=h)))
 
   #used in part 4 to handle individual ARP packets
   #not needed for part 3 (USE RULES!)
@@ -88,7 +122,7 @@ class Part3Controller (object):
       return
 
     packet_in = event.ofp # The actual ofp_packet_in message.
-    print ("Unhandled packet from " + str(self.connection.dpid) + ":" + packet.dump())
+    print('Unhandled packet from '+str(self.connection.dpid)+':'+packet.dump())
 
 def launch ():
   """
