@@ -181,8 +181,8 @@ __Deliverables__:
       - All of their switches are connected to the main switch __cores21__. Through this switch is where I take into account their ports for directing traffic from, e.g., __h10__ to __serv1__, which goes from __h10__ -> __s1__ -> __cores21__ -> __dcs31__ -> __serv1__. Because __serv1__ controls all of the flow, it will guide traffic to the right ports (in the above example, traffic is routed to/from ports 4 and 1)
     - I instead __flood__ all of the outgoing ports to direct traffic in each of the switches (other than __serv1__)
   - Traffic to/from "external" hosts (or, __hnotrust1__)
-    - To not allow any ICMP/ARP requests, these requests are "returned to the sender" when communicating with this host to any of the others "in the network"
-    - To not allow any IPv4/IPv6 traffic to __serv1__, these packets are also "returned to the sender" when communicating with this host to __serv1__
+    - To not allow any ICMP/ARP requests, these requests are "dropped" when communicating with this host to any of the others "in the network" (packets are not sent anywhere) _this allows the `iperf` command to not hang, otherwise this execution crashes (because there is no link)_
+    - To not allow any IPv4/IPv6 traffic to __serv1__, these packets are also "dropped" when communicating with this host to __serv1__
     - To allow IPv4/IPv6 traffic to/from __h10__, __h20__, or __h30__ these packets are routed via their switches (and through __cores21__) to/from ports 5 (if going to __hnotrust1__) and 1/2/3 (if going to __h10__, __h20__, or __h30__)
   
 </details>
